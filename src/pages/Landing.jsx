@@ -1,5 +1,8 @@
 import React from 'react';
 import { Image, Button, Container, Row, Col, Card } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+
+
 
 function Landing() {
   return (
@@ -152,12 +155,12 @@ function Landing() {
             />
           </Col>
           <Col md={4}>
-            <Button
+           <Link to={'/home'}><Button
               style={{ backgroundColor: '#6F402B', borderColor: '#6F402B' }}
               className="m-3"
             >
               Go to Staff Management
-            </Button>
+            </Button></Link>
           </Col>
         </Row>
       </Container>
