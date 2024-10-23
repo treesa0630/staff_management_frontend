@@ -17,7 +17,7 @@ function Department() {
 
     <>
       <div style={{ paddingBottom:'2%' }}>
-        <h4 style={{ color: "#6F402B",fontWeight:'bold' }} className='d-flex align-items-center justify-content-center mt-5 pt-5 '>DEPARTMENT WISE FACULTIES</h4>
+        <h4 style={{ color: "#6F402B",fontWeight:'bold' }} className='d-flex align-items-center justify-content-center mt-5 pt-5'>DEPARTMENT WISE FACULTIES</h4>
         <button style={{ backgroundColor: '#6F402B', borderColor: '#6F402B', color: 'white' }} className="m-3 px-3 py-1 rounded" onClick={handleShow}>ADD DEPARTMENT</button>
 
 
