@@ -4,3 +4,82 @@
   font-family: "Roboto Slab", serif;
 }
 
+/* profilecards vertical scroll in meet-our-team section */
+.profilecards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 13px;
+  overflow-y: auto;
+  max-height: 360px;
+}
+
+
+/* profilecards responsive over all devices */
+@media (min-width: 600px) {
+  .profilecards {
+    grid-template-columns: repeat(2,1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .profilecards {
+    grid-template-columns: repeat(4,1fr);
+  }
+}
+
+
+/* alldepartments vertical scroll */
+.alldepartments{
+  overflow-y: auto;                  
+  max-height: 370px;  
+}
+
+
+/* removed spin button of input-type- number */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+}
+
+
+/* departments horizontal scroll */
+.scrolling-wrapper {
+  padding: 0% 1%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  padding-bottom: 12px;
+
+  .card {
+    display: inline-block;
+    border: none;
+  }
+}
+.scrolling-wrapper-flexbox {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+
+  .card {
+    flex: 0 0 auto;
+  }
+}
+.scrolling-wrapper {
+  -webkit-overflow-scrolling: touch;
+}
+
+
+/* styling provided to the scroll-bar */
+::-webkit-scrollbar { 
+  width: 3px;
+  height: 3px;
+}
+::-webkit-scrollbar-thumb {
+  background-color:#855b48; 
+  border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #7e513d; 
+}
