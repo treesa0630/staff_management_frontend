@@ -19,7 +19,7 @@ function Home() {
 
 
             <div className="col-md-12 text-center mt-5 pt-5">
-              <button style={{ backgroundColor: '#8b563d', borderColor: '#8b563d', color: 'white' }} className="m-3 px-5 py-2 rounded w-25">RESIGNED FACULTIES</button>
+             <Link to={'/Resigned'} style={{textDecoration:'none'}}> <button style={{ backgroundColor: '#8b563d', borderColor: '#8b563d', color: 'white' }} className="m-3 px-5 py-2 rounded ">RESIGNED FACULTIES</button></Link>
             </div>
 
           </div>

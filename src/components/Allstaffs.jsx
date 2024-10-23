@@ -15,7 +15,7 @@ function Allstaffs() {
 
   return (
     <>
-      <div className='mb-5' style={{ height: '41vh' }}>
+      <div className='mb-5' style={{ height: '51vh' }}>
         <h4 style={{ color: "#6F402B",fontWeight:'bold'  }} className='text-center '>MEET OUR TEAM</h4>
         
         
