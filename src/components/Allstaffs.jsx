@@ -1,19 +1,44 @@
+
 import React from 'react'
 import Card from 'react-bootstrap/Card';
+import Profilecard from './Profilecard';
+import { useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+
 
 function Allstaffs() {
-  
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   return (
-    <div>
-      <h4 style={{ color: "#6F402B", }} className='d-flex align-items-center justify-content-center '>MEET OUR TEAM</h4>
-      <button style={{ backgroundColor: '#6F402B', borderColor: '#6F402B', color: 'white' }} className="m-3 rounded">ADD FACULTY</button>
+    <>
+      <div className='mb-5' style={{ height: '41vh' }}>
+        <h4 style={{ color: "#6F402B",fontWeight:'bold'  }} className='text-center '>MEET OUR TEAM</h4>
+        
+        
+        <div className='d-flex justify-content-between'>
+          <button style={{ backgroundColor: '#6F402B', borderColor: '#6F402B', color: 'white' }} className="m-3 px-3 py-1 rounded" onClick={handleShow}>ADD FACULTY</button>
+        </div>
 
-      {/* Add faculties */}
 
+        {/* Add faculties */}
 
+        <div >
+          <div className="profilecards d-grid">
 
-      <div className="container">
-        <div className='row'>
+            <Profilecard />
+            <Profilecard />
+            <Profilecard />
+            <Profilecard />
+            <Profilecard />
+            <Profilecard />
+
+          </div>
+
+          {/* <div className='row'>
           <div className="col-md-3 p-2">
             <Card style={{ width: '100%' }}>
               <Card.Img variant="top" src="https://media.istockphoto.com/id/640078698/photo/intelligent-female-math-professor-in-classroom.jpg?s=612x612&w=0&k=20&c=8nbp8UUP9aowHOr-FrmdPkVrAtDU66Jx-TaZKgEf4Xo=" className='w-100' height={"200px"} />
@@ -21,7 +46,7 @@ function Allstaffs() {
                 <Card.Text className='fs-4'>Name:</Card.Text>
 
 
-                {/* <Button variant="primary"></Button> */}
+                
               </Card.Body>
             </Card>
           </div>
@@ -31,7 +56,7 @@ function Allstaffs() {
               <Card.Body className='d-flex justify-content-between'>
                 <Card.Text className='fs-4'>Name:</Card.Text>
 
-                {/* <Button variant="primary"></Button> */}
+               
               </Card.Body>
             </Card>
           </div>
@@ -41,7 +66,7 @@ function Allstaffs() {
               <Card.Body className='d-flex justify-content-between'>
                 <Card.Text className='fs-4'>Name:</Card.Text>
 
-                {/* <Button variant="primary"></Button> */}
+                
               </Card.Body>
             </Card>
           </div>
@@ -51,18 +76,18 @@ function Allstaffs() {
               <Card.Body className='d-flex justify-content-between'>
                 <Card.Text className='fs-4'>Name:</Card.Text>
 
-                {/* <Button variant="primary"></Button> */}
+                
               </Card.Body>
             </Card>
           </div>
-          {/* f5 */}
+          
           <div className="col-md-3  p-2">
             <Card style={{ width: '100%' }}>
               <Card.Img variant="top" src="https://media.istockphoto.com/id/1330641849/photo/female-math-teacher-in-school.jpg?s=612x612&w=0&k=20&c=qqqo-pRJBrE5ItkCljXOVfRSSpLnMa0hVrbhy-ZoydU=" className='w-100' height={"200px"} />
               <Card.Body className='d-flex justify-content-between'>
                 <Card.Text className='fs-4'>Name:</Card.Text>
 
-                {/* <Button variant="primary"></Button> */}
+                
               </Card.Body>
             </Card>
           </div>
@@ -73,7 +98,7 @@ function Allstaffs() {
               <Card.Body className='d-flex justify-content-between'>
                 <Card.Text className='fs-4'>Name:</Card.Text>
 
-                {/* <Button variant="primary"></Button> */}
+                
               </Card.Body>
             </Card>
           </div>
@@ -84,7 +109,7 @@ function Allstaffs() {
               <Card.Body className='d-flex justify-content-between'>
                 <Card.Text className='fs-4'>Name:</Card.Text>
 
-                {/* <Button variant="primary"></Button> */}
+                
               </Card.Body>
             </Card>
           </div>
@@ -95,34 +120,72 @@ function Allstaffs() {
               <Card.Body className='d-flex justify-content-between'>
                 <Card.Text className='fs-4'>Name:</Card.Text>
 
-                {/* <Button variant="primary"></Button> */}
+                
               </Card.Body>
             </Card>
           </div>
 
-
-
+        </div> */}
 
         </div>
+
+
+
+        {/* no faculties added */}
+
+        {/* <div className='container'>
+          <div className="row">
+            <div className="col-md-4"></div>
+            <div className="col-md-4">
+              <img src="https://png.pngtree.com/thumb_back/fh260/background/20220812/pngtree-question-flat-brown-color-rounded-raster-icon-know-answer-helpdesk-photo-image_19485160.jpg" className='w-50' alt="" />
+  
+              <h5 className='text-center'>No Faculties Added</h5>
+            </div>
+            <div className="col-md-4"></div>
+          </div>
+  
+        </div> */}
+
+
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header className='bg-secondary' closeButton>
+            <Modal.Title className='fs-5'>Add Faculty Details</Modal.Title>
+          </Modal.Header>
+          <Modal.Body ><form className="p-3" action="">
+            <div className='mb-3'>
+              <input type="text" style={{ fontSize: '14px' }} placeholder='PROFILE PHOTO' id="video" className='form-control' />
+            </div>
+            <div className='mb-3'>
+              <input type="text" style={{ fontSize: '14px' }} placeholder='FULL NAME' id="caption" className='form-control' />
+            </div>
+            <div className='mb-3'>
+              <input type="text" style={{ fontSize: '14px' }} placeholder='DESIGNATION' id="image" className='form-control' />
+            </div>
+            <div className='mb-3'>
+              <input type="text" style={{ fontSize: '14px' }} placeholder='DEPARTMENT' id="video" className='form-control' />
+            </div>
+            <div className='mb-3'>
+              <input type="number" style={{ fontSize: '14px' }} placeholder='EXPERIENCE' id="video" className='form-control' />
+            </div>
+            <div className='mb-3'>
+              <input type="number" style={{ fontSize: '14px' }} placeholder='PHONE NO:' id="video" className='form-control' />
+            </div>
+            <div className='mb-3'>
+              <input type="mail" style={{ fontSize: '14px' }} placeholder='EMAIL ID' id="video" className='form-control' />
+            </div>
+          </form></Modal.Body>
+          <Modal.Footer >
+            <Button variant="dark" onClick={handleClose}>
+              Cancel
+            </Button>
+            <Button variant="success" onClick={handleClose}>
+              Add
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </div>
 
-
-
-      {/* no faculties added */}
-
-      {/* <div className='container'>
-        <div className="row">
-          <div className="col-md-4"></div>
-          <div className="col-md-4">
-            <img src="https://png.pngtree.com/thumb_back/fh260/background/20220812/pngtree-question-flat-brown-color-rounded-raster-icon-know-answer-helpdesk-photo-image_19485160.jpg" className='w-50' alt="" />
-
-            <h5 className='text-center'>No Faculties Added</h5>
-          </div>
-          <div className="col-md-4"></div>
-        </div>
-
-      </div> */}
-    </div>
+    </>
   )
 }
 
