@@ -145,7 +145,7 @@ function Landing() {
           </Col>
         </Row>
 
-        <Row className="d-flex align-items-center justify-content-center mb-5">
+        <Row className="d-flex align-items-center justify-content-center pb-5">
           <h3 style={{ color: '#6F402B' }}>STAFF MANAGEMENT</h3>
           <Col md={8} className="mb-5 ">
             <img
