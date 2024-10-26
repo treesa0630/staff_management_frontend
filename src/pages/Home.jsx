@@ -5,6 +5,8 @@ import Department from '../components/Department'
 
 function Home() {
 
+  const [profileStatus , setProfileStatus] = useState({})
+
  
   return (
     <>
@@ -12,11 +14,11 @@ function Home() {
         <div className='container' >
           <div className='row'>
             <div className="col-md-12">
-              <Allstaffs />
+              <Allstaffs setProfileStatus={setProfileStatus} />
             </div>
 
             <div className="col-md-12">
-              <Department />
+              <Department profileStatus={profileStatus} />
             </div>
 
 
