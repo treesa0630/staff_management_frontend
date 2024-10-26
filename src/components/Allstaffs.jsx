@@ -54,7 +54,7 @@ function Allstaffs() {
     const { photo, name, designation, department, experience, phone, mail } = facultyDetails
     if (!name || !photo || !designation || !department || !experience || !phone || !phone || !mail) {
       toast.info('please fill the form completely')
-      handleClose();
+      // handleClose();
     }
     else {
       const result = await addFacultyApi(facultyDetails)
@@ -96,7 +96,7 @@ function Allstaffs() {
 
 
         <div className='d-flex justify-content-between'>
-          <button style={{ backgroundColor: '#6F402B', borderColor: '#6F402B', color: 'white' }} className="m-3 px-3 py-1 rounded" onClick={handleShow}>ADD FACULTY</button>
+          <button style={{ backgroundColor: '#6F402B', borderColor: '#6F402B', color: 'white' }} className="m-3 px-3 py-1 rounded shadow" onClick={handleShow}>ADD FACULTY</button>
         </div>
 
 
