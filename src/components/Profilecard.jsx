@@ -5,25 +5,32 @@ import { Card } from 'react-bootstrap'
 import Modal from 'react-bootstrap/Modal';
 
 
-function Profilecard({ details }) {
+function Profilecard({ details , isPresent}) {
   const [modalShow, setModalShow] = useState(false);
+
+  const profileDrag = (e,details)=>{
+    console.log(details);
+    e.dataTransfer.setData("profileDetails",JSON.stringify(details))
+    
+
+  }
 
   return (
     <>
       <div className="card me-3">
-        <Card style={{ width: '100%' }}>
-          <Card.Img
+        <Card style={{ width: '100%' }} draggable onDragStart={(e)=>profileDrag(e,details)} className='mt-4'>
+        { !isPresent && <Card.Img
             variant="top"
             src={details?.photo}
             onClick={() => setModalShow(true)}
             className='w-100'
             height={"200px"}
-          />
+          />}
           <Card.Body className='d-flex justify-content-between'>
             <Card.Text style={{ fontSize: '16px' }}>{details?.name}</Card.Text>
-            <button className='btn border border-danger btn-danger'>
+          {!isPresent &&  <button className='btn border border-danger btn-danger'>
               <FontAwesomeIcon icon={faTrash} />
-            </button>
+            </button>}
           </Card.Body>
         </Card>
       </div>

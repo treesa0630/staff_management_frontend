@@ -4,16 +4,17 @@ import Profilecard from './Profilecard';
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { addFacultyApi, getFacultyDetailsApi } from '../services/allApi';
+import { addFacultyApi, getFacultyDetailsApi,addprofileToDepartmentApi } from '../services/allApi';
 import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-function Allstaffs() {
+function Allstaffs({setProfileStatus}) {
   const [show, setShow] = useState(false);
 
   const [ facultyStatus , setFacultyStatus]= useState({})
+  
 
   const handleClose = () => {
     setShow(false)
@@ -83,15 +84,41 @@ function Allstaffs() {
 
   console.log(allFaculty);
 
+  const ondrop = (e)=>{
+    e.preventDefault()
+  }
+  const ProfileDrop = async (e)=>{
+    const {department, details}= JSON.parse(e.dataTransfer.getData("dataShare"))
+    console.log(department,details);
+
+  const newArray =  department.staffs.filter((item)=>item.id!=details.id)
+  const newDepartment = {
+    department:department.department,
+    staffs:newArray,
+    id:department.id
+  }
+ const result = await addprofileToDepartmentApi(department.id, newDepartment)
+ console.log(result);
+
+ if(result.status>=200 && result.status<300){
+  setProfileStatus(result.data)
+ }
+//  else{
+//   toast.error('Something went wrong')
+//  }
+ 
+    
+  }
 
   useEffect(() => {
     getAllFacultyDetails()
   }, [facultyStatus])
 
 
+
   return (
     <>
-      <div className='mb-5' style={{ height: '51vh' }}>
+      <div className='mb-5' style={{ height: '51vh' }} droppable onDragOver={(e)=>ondrop(e)} onDrop={(e)=>ProfileDrop(e)}>
         <h4 style={{ color: "#6F402B", fontWeight: 'bold' }} className='text-center '>MEET OUR TEAM</h4>
 
 

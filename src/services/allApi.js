@@ -21,3 +21,8 @@ export const getDepartmentApi = async()=>{
 export const deleteDepartmentApi = async(id)=>{
     return await commonApi('DELETE', `${serverUrl}/department/${id}`)
 }
+
+export const addprofileToDepartmentApi = async(id,reqBody)=>{
+    return await commonApi('PUT',`${serverUrl}/department/${id}`,reqBody)
+
+}
