@@ -7,7 +7,7 @@ function ResignedFaculties() {
         <div className="container">
           <div className="row">
             <div className="col-12">
-              <h3 className="text-center" style={{ color: "#6F402B", fontWeight: 'bold' }}>Resigned Faculty Details</h3>
+              <h3 className="text-center mt-5" style={{ color: "#6F402B", fontWeight: 'bold' }}>Resigned Faculty Details</h3>
             </div>
           </div>
           <div className="row justify-content-center">
