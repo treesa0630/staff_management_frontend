@@ -3,6 +3,9 @@ import React from 'react';
 function ResignedFaculties() {
   return (
     <>
+
+
+
       <div style={{ backgroundColor: 'rgb(168,124,98)', minHeight: '55vh' }}>
         <div className="container">
           <div className="row">
@@ -41,6 +44,7 @@ function ResignedFaculties() {
                   </tbody>
                 </table>
               </div>
+
             </div>
           </div>
         </div>
