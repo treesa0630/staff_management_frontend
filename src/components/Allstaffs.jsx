@@ -15,7 +15,7 @@ function Allstaffs({setProfileStatus}) {
 
   const [ facultyStatus , setFacultyStatus]= useState({})
   
-
+  const[deleteFacultyStatus, setDeleteFacultyStatus]=useState([])
   const handleClose = () => {
     setShow(false)
     handleCancel() //to clear the data enter in the input box while the modal is closed
@@ -112,7 +112,7 @@ function Allstaffs({setProfileStatus}) {
 
   useEffect(() => {
     getAllFacultyDetails()
-  }, [facultyStatus])
+  }, [facultyStatus,deleteFacultyStatus])
 
 
 
@@ -135,7 +135,7 @@ function Allstaffs({setProfileStatus}) {
               
                 <div className="profilecards d-grid">
                 {allFaculty.map((item) => (
-                  <Profilecard details={item} />
+                  <Profilecard details={item} setDeleteFacultyStatus={setDeleteFacultyStatus} />
                 ))
               }
                 </div>

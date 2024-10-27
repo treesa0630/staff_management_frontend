@@ -139,7 +139,7 @@ const ondrag =(e)=>{
             allDepartments.map((item) => (<div className='department border border-secondary mb-1 rounded p-2' droppable onDragOver={(e)=>ondrag(e)} onDrop={(e)=>ProfileDrop(e,item)}>
               <div className='d-flex justify-content-between '>
                 <h6 className='fs-5 mt-2'><b>{item?.department}</b></h6>
-                <Button onClick={() => handleDelete(item?.id)} variant="danger"><FontAwesomeIcon icon={faTrash} style={{ color: "#ffffff", }}  /></Button>
+                <Button onClick={()=>handleDelete(item?.id)} variant="danger"><FontAwesomeIcon icon={faTrash} style={{ color: "#ffffff", }}  /></Button>
               </div>
              { item?.staffs?.length>0 &&
              item?.staffs?.map((details)=>(
@@ -147,7 +147,6 @@ const ondrag =(e)=>{
               <Profilecard details={details} isPresent={true}/>
            
            </div>
-
              ))
             }
              

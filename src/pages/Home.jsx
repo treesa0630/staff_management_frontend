@@ -7,7 +7,7 @@ function Home() {
 
   const [profileStatus , setProfileStatus] = useState({})
 
- 
+
   return (
     <>
       <div className='d-flex p-md-5 p-3' style={{ backgroundColor: '#A87C62' }} >
