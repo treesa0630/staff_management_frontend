@@ -1,76 +1,93 @@
-import React from 'react'
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useEffect, useState } from 'react'
 import { Card } from 'react-bootstrap'
 import Modal from 'react-bootstrap/Modal';
 
-function Profilecard() {
-    const [modalShow, setModalShow] = React.useState(false);
 
-    return (
-        <>
-            <div className="card me-3" >
-                <Card style={{ width: '100%' }}>
-                    <Card.Img variant="top" src="https://media.istockphoto.com/id/640078698/photo/intelligent-female-math-professor-in-classroom.jpg?s=612x612&w=0&k=20&c=8nbp8UUP9aowHOr-FrmdPkVrAtDU66Jx-TaZKgEf4Xo=" onClick={() => setModalShow(true)} className='w-100' height={"200px"} />
-                    <Card.Body className='d-flex justify-content-between'>
-                        <Card.Text style={{fontSize:'16px'}}>Annie Mary Wilson</Card.Text>
-                    </Card.Body>
-                </Card>
-            </div>
+function Profilecard({ details , isPresent}) {
+  const [modalShow, setModalShow] = useState(false);
 
+  const profileDrag = (e,details)=>{
+    console.log(details);
+    e.dataTransfer.setData("profileDetails",JSON.stringify(details))
+    
 
+  }
 
+  return (
+    <>
+      <div className="card me-3">
+        <Card style={{ width: '100%' }} draggable onDragStart={(e)=>profileDrag(e,details)} className='mt-4'>
+        { !isPresent && <Card.Img
+            variant="top"
+            src={details?.photo}
+            onClick={() => setModalShow(true)}
+            className='w-100'
+            height={"200px"}
+          />}
+          <Card.Body className='d-flex justify-content-between'>
+            <Card.Text style={{ fontSize: '16px' }}>{details?.name}</Card.Text>
+          {!isPresent &&  <button className='btn border border-danger btn-danger'>
+              <FontAwesomeIcon icon={faTrash} />
+            </button>}
+          </Card.Body>
+        </Card>
+      </div>
 
-            <MyVerticallyCenteredModal
-        show={modalShow} animation={false}
+      {/* Pass `details` prop to the modal */}
+      <MyVerticallyCenteredModal
+        show={modalShow}
         onHide={() => setModalShow(false)}
+        details={details} // Pass details here
+        animation={false}
       />
-        </>
-    )
+    </>
+  );
 }
 
-function MyVerticallyCenteredModal(props) {
-    return (
-      <Modal
-        {...props}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-        <span className='text-primary '>  Annie Mary Wilson </span>
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <table className=' '>
-            <thead>
-            <tbody>
-            <tr >
-                <th className='p-2'>DESIGNATION: </th>
-                <td className='p-2'>Ass. Professor</td>
+function MyVerticallyCenteredModal({ show, onHide, details }) {
+  return (
+    <Modal
+      show={show}
+      onHide={onHide}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          <span className='text-primary'>{details?.name}</span>
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <table>
+          <tbody>
+            <tr>
+              <th className='p-2'>DESIGNATION: </th>
+              <td className='p-2'>{details?.designation}</td>
             </tr>
             <tr>
-                <th className='p-2'>DEPARTMENT: </th>
-                <td className='p-2'>Computer Science</td>
+              <th className='p-2'>DEPARTMENT: </th>
+              <td className='p-2'>{details?.department}</td>
             </tr>
             <tr>
-                <th className='p-2'>EXPERIENCE: </th>
-                <td className='p-2'>5 years</td>
+              <th className='p-2'>EXPERIENCE: </th>
+              <td className='p-2'>{details?.experience}</td>
             </tr>
             <tr>
-                <th className='p-2'>CONTACT NO: </th>
-                <td className='p-2'>9876543212</td>
+              <th className='p-2'>CONTACT NO: </th>
+              <td className='p-2'>{details?.phone}</td>
             </tr>
             <tr>
-                <th className='p-2'>EMAIL  ID: </th>
-                <td className='p-2'>faculty@gmail.com</td>
+              <th className='p-2'>EMAIL ID: </th>
+              <td className='p-2'>{details?.mail}</td>
             </tr>
           </tbody>
-            </thead>
-          </table>
-        </Modal.Body>
-      </Modal>
-    );
-  }
-  
+        </table>
+      </Modal.Body>
+    </Modal>
+  );
+}
 
 export default Profilecard

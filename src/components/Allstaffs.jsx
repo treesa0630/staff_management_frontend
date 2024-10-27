@@ -1,150 +1,148 @@
 
-import React from 'react'
-import Card from 'react-bootstrap/Card';
+import React, { useEffect } from 'react'
 import Profilecard from './Profilecard';
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { addFacultyApi, getFacultyDetailsApi,addprofileToDepartmentApi } from '../services/allApi';
+import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
-function Allstaffs() {
+function Allstaffs({setProfileStatus}) {
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
+  const [ facultyStatus , setFacultyStatus]= useState({})
+  
+
+  const handleClose = () => {
+    setShow(false)
+    handleCancel() //to clear the data enter in the input box while the modal is closed
+  };
   const handleShow = () => setShow(true);
+
+
+  // to read faculty details from input box
+
+  const [facultyDetails, setFacultyDetails] = useState({
+    photo: '',
+    name: '',
+    designation: '',
+    department: '',
+    experience: '',
+    phone: '',
+    mail: ''
+
+  })
+  console.log(facultyDetails);
+
+  //function handleCancel
+  const handleCancel = () => {
+    setFacultyDetails({
+      photo: '',
+      name: '',
+      designation: '',
+      department: '',
+      experience: '',
+      phone: '',
+      mail: ''
+    })
+  }
+
+  // function to add the deatils 
+  const handleAdd = async () => {
+    const { photo, name, designation, department, experience, phone, mail } = facultyDetails
+    if (!name || !photo || !designation || !department || !experience || !phone || !phone || !mail) {
+      toast.info('please fill the form completely')
+      // handleClose();
+    }
+    else {
+      const result = await addFacultyApi(facultyDetails)
+
+      if (result.status >= 200 && result.status < 300) {
+        toast.success('successfully added');
+        handleClose()
+        setFacultyStatus(result.data)
+        
+      }
+      else {
+        toast.danger('Something Went wrong');
+        handleClose()
+      }
+    }
+  }
+
+  const [allFaculty, setAllFaculty] = useState([])
+
+  // is to fetch all faculty details 
+  const getAllFacultyDetails = async () => {
+    const result = await getFacultyDetailsApi()
+    setAllFaculty(result.data)
+
+  }
+
+  console.log(allFaculty);
+
+  const ondrop = (e)=>{
+    e.preventDefault()
+  }
+  const ProfileDrop = async (e)=>{
+    const {department, details}= JSON.parse(e.dataTransfer.getData("dataShare"))
+    console.log(department,details);
+
+  const newArray =  department.staffs.filter((item)=>item.id!=details.id)
+  const newDepartment = {
+    department:department.department,
+    staffs:newArray,
+    id:department.id
+  }
+ const result = await addprofileToDepartmentApi(department.id, newDepartment)
+ console.log(result);
+
+ if(result.status>=200 && result.status<300){
+  setProfileStatus(result.data)
+ }
+//  else{
+//   toast.error('Something went wrong')
+//  }
+ 
+    
+  }
+
+  useEffect(() => {
+    getAllFacultyDetails()
+  }, [facultyStatus])
+
+
 
   return (
     <>
-      <div className='mb-5' style={{ height: '51vh' }}>
-        <h4 style={{ color: "#6F402B",fontWeight:'bold'  }} className='text-center '>MEET OUR TEAM</h4>
-        
-        
+      <div className='mb-5' style={{ height: '51vh' }} droppable onDragOver={(e)=>ondrop(e)} onDrop={(e)=>ProfileDrop(e)}>
+        <h4 style={{ color: "#6F402B", fontWeight: 'bold' }} className='text-center '>MEET OUR TEAM</h4>
+
+
         <div className='d-flex justify-content-between'>
-          <button style={{ backgroundColor: '#6F402B', borderColor: '#6F402B', color: 'white' }} className="m-3 px-3 py-1 rounded" onClick={handleShow}>ADD FACULTY</button>
+          <button style={{ backgroundColor: '#6F402B', borderColor: '#6F402B', color: 'white' }} className="m-3 px-3 py-1 rounded shadow" onClick={handleShow}>ADD FACULTY</button>
         </div>
 
 
         {/* Add faculties */}
 
-        <div >
-          <div className="profilecards d-grid">
+        {
+          allFaculty.length > 0 &&
+            <div >
+              
+                <div className="profilecards d-grid">
+                {allFaculty.map((item) => (
+                  <Profilecard details={item} />
+                ))
+              }
+                </div>
+              
 
-            <Profilecard />
-            <Profilecard />
-            <Profilecard />
-            <Profilecard />
-            <Profilecard />
-            <Profilecard />
-
-          </div>
-
-          {/* <div className='row'>
-          <div className="col-md-3 p-2">
-            <Card style={{ width: '100%' }}>
-              <Card.Img variant="top" src="https://media.istockphoto.com/id/640078698/photo/intelligent-female-math-professor-in-classroom.jpg?s=612x612&w=0&k=20&c=8nbp8UUP9aowHOr-FrmdPkVrAtDU66Jx-TaZKgEf4Xo=" className='w-100' height={"200px"} />
-              <Card.Body className='d-flex justify-content-between'>
-                <Card.Text className='fs-4'>Name:</Card.Text>
-
-
-                
-              </Card.Body>
-            </Card>
-          </div>
-          <div className="col-md-3  p-2">
-            <Card style={{ width: '100%' }}>
-              <Card.Img variant="top" src="https://images.academics.com/professorentitel.jpg?auto=format&fit=crop&h=768&w=1365&crop=focalpoint&fp-x=0.55&fp-y=0.32" className='w-100' height={"200px"} />
-              <Card.Body className='d-flex justify-content-between'>
-                <Card.Text className='fs-4'>Name:</Card.Text>
-
-               
-              </Card.Body>
-            </Card>
-          </div>
-          <div className="col-md-3  p-2">
-            <Card style={{ width: '100%' }}>
-              <Card.Img variant="top" src="https://media.istockphoto.com/id/1089059426/photo/teacher-posing-on-blackboard.jpg?s=612x612&w=0&k=20&c=s6EMLpSPYOwJ9Euzis2heE9tapB7cWmFXZEuMVG7R88=" className='w-100' height={"200px"} />
-              <Card.Body className='d-flex justify-content-between'>
-                <Card.Text className='fs-4'>Name:</Card.Text>
-
-                
-              </Card.Body>
-            </Card>
-          </div>
-          <div className="col-md-3  p-2">
-            <Card style={{ width: '100%' }}>
-              <Card.Img variant="top" src="https://img.freepik.com/premium-photo/teachers-day-handsome-man-teacher-teaching_548646-71144.jpg" className='w-100' height={"200px"} />
-              <Card.Body className='d-flex justify-content-between'>
-                <Card.Text className='fs-4'>Name:</Card.Text>
-
-                
-              </Card.Body>
-            </Card>
-          </div>
-          
-          <div className="col-md-3  p-2">
-            <Card style={{ width: '100%' }}>
-              <Card.Img variant="top" src="https://media.istockphoto.com/id/1330641849/photo/female-math-teacher-in-school.jpg?s=612x612&w=0&k=20&c=qqqo-pRJBrE5ItkCljXOVfRSSpLnMa0hVrbhy-ZoydU=" className='w-100' height={"200px"} />
-              <Card.Body className='d-flex justify-content-between'>
-                <Card.Text className='fs-4'>Name:</Card.Text>
-
-                
-              </Card.Body>
-            </Card>
-          </div>
-
-          <div className="col-md-3  p-2">
-            <Card style={{ width: '100%' }}>
-              <Card.Img variant="top" src="https://img.freepik.com/premium-photo/professor-lecturing-room_951586-130591.jpg" className='w-100' height={"200px"} />
-              <Card.Body className='d-flex justify-content-between'>
-                <Card.Text className='fs-4'>Name:</Card.Text>
-
-                
-              </Card.Body>
-            </Card>
-          </div>
-
-          <div className="col-md-3  p-2">
-            <Card style={{ width: '100%' }}>
-              <Card.Img variant="top" src="https://img.freepik.com/premium-photo/professor-lecturing-room_951586-130336.jpg" className='w-100' height={"200px"} />
-              <Card.Body className='d-flex justify-content-between'>
-                <Card.Text className='fs-4'>Name:</Card.Text>
-
-                
-              </Card.Body>
-            </Card>
-          </div>
-
-          <div className="col-md-3  p-2">
-            <Card style={{ width: '100%' }}>
-              <Card.Img variant="top" src="https://static.vecteezy.com/system/resources/thumbnails/037/211/111/small_2x/ai-generated-portrait-of-pretty-female-professor-with-glasses-in-the-classroom-people-background-photo.jpg" className='w-100' height={"200px"} />
-              <Card.Body className='d-flex justify-content-between'>
-                <Card.Text className='fs-4'>Name:</Card.Text>
-
-                
-              </Card.Body>
-            </Card>
-          </div>
-
-        </div> */}
-
-        </div>
-
-
-
-        {/* no faculties added */}
-
-        {/* <div className='container'>
-          <div className="row">
-            <div className="col-md-4"></div>
-            <div className="col-md-4">
-              <img src="https://png.pngtree.com/thumb_back/fh260/background/20220812/pngtree-question-flat-brown-color-rounded-raster-icon-know-answer-helpdesk-photo-image_19485160.jpg" className='w-50' alt="" />
-  
-              <h5 className='text-center'>No Faculties Added</h5>
             </div>
-            <div className="col-md-4"></div>
-          </div>
-  
-        </div> */}
+}
 
 
         <Modal show={show} onHide={handleClose}>
@@ -153,38 +151,42 @@ function Allstaffs() {
           </Modal.Header>
           <Modal.Body ><form className="p-3" action="">
             <div className='mb-3'>
-              <input type="text" style={{ fontSize: '14px' }} placeholder='PROFILE PHOTO' id="video" className='form-control' />
+              <input type="text" style={{ fontSize: '14px' }} placeholder='PROFILE PHOTO' id="video" className='form-control' onChange={(e) => setFacultyDetails({ ...facultyDetails, photo: e.target.value })}
+                value={facultyDetails.photo} />
             </div>
             <div className='mb-3'>
-              <input type="text" style={{ fontSize: '14px' }} placeholder='FULL NAME' id="caption" className='form-control' />
+              <input type="text" style={{ fontSize: '14px' }} placeholder='FULL NAME' id="caption" className='form-control' onChange={(e) => setFacultyDetails({ ...facultyDetails, name: e.target.value })}
+                value={facultyDetails.name} />
             </div>
             <div className='mb-3'>
-              <input type="text" style={{ fontSize: '14px' }} placeholder='DESIGNATION' id="image" className='form-control' />
+              <input type="text" style={{ fontSize: '14px' }} placeholder='DESIGNATION' id="image" className='form-control' onChange={(e) => setFacultyDetails({ ...facultyDetails, designation: e.target.value })}
+                value={facultyDetails.designation} />
             </div>
             <div className='mb-3'>
-              <input type="text" style={{ fontSize: '14px' }} placeholder='DEPARTMENT' id="video" className='form-control' />
+              <input type="text" style={{ fontSize: '14px' }} placeholder='DEPARTMENT' id="video" className='form-control' onChange={(e) => setFacultyDetails({ ...facultyDetails, department: e.target.value })} value={facultyDetails.department} />
             </div>
             <div className='mb-3'>
-              <input type="number" style={{ fontSize: '14px' }} placeholder='EXPERIENCE' id="video" className='form-control' />
+              <input type="number" style={{ fontSize: '14px' }} placeholder='EXPERIENCE' id="video" className='form-control' onChange={(e) => setFacultyDetails({ ...facultyDetails, experience: e.target.value })} value={facultyDetails.experience} />
             </div>
             <div className='mb-3'>
-              <input type="number" style={{ fontSize: '14px' }} placeholder='PHONE NO:' id="video" className='form-control' />
+              <input type="number" style={{ fontSize: '14px' }} placeholder='PHONE NO:' id="video" className='form-control' onChange={(e) => setFacultyDetails({ ...facultyDetails, phone: e.target.value })} value={facultyDetails.phone} />
             </div>
             <div className='mb-3'>
-              <input type="mail" style={{ fontSize: '14px' }} placeholder='EMAIL ID' id="video" className='form-control' />
+              <input type="mail" style={{ fontSize: '14px' }} placeholder='EMAIL ID' id="video" className='form-control' onChange={(e) => setFacultyDetails({ ...facultyDetails, mail: e.target.value })} value={facultyDetails.mail} />
             </div>
           </form></Modal.Body>
           <Modal.Footer >
-            <Button variant="dark" onClick={handleClose}>
+            <Button variant="dark" onClick={handleCancel}>
               Cancel
             </Button>
-            <Button variant="success" onClick={handleClose}>
+            <Button variant="success" onClick={handleAdd}>
               Add
             </Button>
           </Modal.Footer>
         </Modal>
-      </div>
 
+      </div>
+      <ToastContainer position='top-center' autoClose={2000} theme="colored" />
     </>
   )
 }
