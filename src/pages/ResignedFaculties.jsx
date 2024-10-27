@@ -2,12 +2,12 @@ import React from 'react'
 function ResignedFaculties() {
   return (
     <>
-<div style={{backgroundColor:'rgb(168,124,98)',minHeight:'55vh'}} >
+<div style={{backgroundColor:'rgb(168,124,98)',minHeight:'55vh',width:'100%'}} >
         <div className='row w-100' >
             <h3 className='text-center' style={{color: "#6F402B",fontWeight:'bold' }}>Resigned Faculty Details</h3>
             <div className='col-md-1'></div>
-            <div className='col-md-10'>
-            <table className='table table-responsive table-striped table-warning'>
+            <div className='col-md-10 table-responsive'>
+            <table className='table  table-striped table-warning'>
               <thead>
                 <tr>
                     <th>ID</th>
