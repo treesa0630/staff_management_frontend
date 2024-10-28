@@ -1,1 +1,1 @@
-export const serverUrl = 'http://localhost:4005'
+export const serverUrl = 'https://staff-management-server-85x4.onrender.com'
