@@ -3,17 +3,42 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react'
 import { Card } from 'react-bootstrap'
 import Modal from 'react-bootstrap/Modal';
+import { addResignedApi, deleteFacultyApi
+ } from '../services/allApi';
 
 
-function Profilecard({ details , isPresent}) {
+function Profilecard({ details ,setDeleteFacultyStatus,isPresent}) {
   const [modalShow, setModalShow] = useState(false);
-
   const profileDrag = (e,details)=>{
     console.log(details);
     e.dataTransfer.setData("profileDetails",JSON.stringify(details))
     
 
   }
+
+  const handleDelete = async (id,photo,name,designation,department,experience,phone,mail) => {
+    //console.log(id,photo,name,designation,department,experience,phone,mail)
+    const result1 = await deleteFacultyApi(id)
+    console.log(result1)
+    if (result1.status >= 200 && result1.status < 300)
+    {
+      setDeleteFacultyStatus(result1.data)
+    }
+    const date = new Date()
+ let rdate=new Intl.DateTimeFormat("en-GB",{year:'numeric',month:'2-digit',day:'2-digit'}).format(date)
+  const reqBody={
+    photo:photo,
+    name:name,
+    designation:designation,
+    department:department,
+    experiance:experience,
+    phone:phone,
+    mail:mail,
+    resDate:rdate
+  }
+ const result2=await addResignedApi(reqBody)
+ console.log(result2.data);
+}
 
   return (
     <>
@@ -28,7 +53,7 @@ function Profilecard({ details , isPresent}) {
           />}
           <Card.Body className='d-flex justify-content-between'>
             <Card.Text style={{ fontSize: '16px' }}>{details?.name}</Card.Text>
-          {!isPresent &&  <button className='btn border border-danger btn-danger'>
+          {!isPresent &&  <button className='btn border border-danger btn-danger' onClick={() => handleDelete(details?.id,details?.photo,details?.name,details?.designation,details?.department,details?.experience,details?.phone,details?.mail)}>
               <FontAwesomeIcon icon={faTrash} />
             </button>}
           </Card.Body>

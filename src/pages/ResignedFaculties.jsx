@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { getResignedApi } from '../services/allApi';
 
 function ResignedFaculties() {
+
+  const[allResignedFaculties,setAllResignedFaculties]=useState([])
+
+ const  getResignedFaculty=async()=>{
+
+  const result=await getResignedApi()
+  setAllResignedFaculties(result.data);
+
+  }
+
+console.log(allResignedFaculties);
+  useEffect(()=>{getResignedFaculty()},[])
   return (
     <>
-
-
 
       <div style={{ backgroundColor: 'rgb(168,124,98)', minHeight: '55vh' }}>
         <div className="container">
@@ -16,34 +27,43 @@ function ResignedFaculties() {
           <div className="row justify-content-center">
             <div className="col-12 col-md-10">
               
-              <div style={{ overflowX: 'auto' }}>
+             { allResignedFaculties?.length>0 ? <div style={{ overflowX: 'auto' }}>
                 <table className="table table-striped table-warning">
                   <thead>
                     <tr>
-                      <th>ID</th>
+                      <th>SI.NO</th>
                       <th>PHOTO</th>
                       <th>NAME</th>
-                      <th>POSITION</th>
-                      <th>QUALIFICATION</th>
+                      <th>DESIGNATION</th>
+                      <th>DEPARTMENT</th>
+                      <th>EXPERIENCE</th>
+                      <th>CONTACT NO</th>
+                      <th>MAIL</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>1</td>
+                   {allResignedFaculties?.map((item,index)=>(<tr>
+                      <td>{index+1}</td>
                       <td>
                         <img
-                          src="https://media.istockphoto.com/id/640078698/photo/intelligent-female-math-professor-in-classroom.jpg?s=612x612&w=0&k=20&c=8nbp8UUP9aowHOr-FrmdPkVrAtDU66Jx-TaZKgEf4Xo="
+                          src= {item?.photo}
                           alt="Faculty Member"
                           style={{ height: '80px', width: '80px', objectFit: 'cover' }}
                         />
                       </td>
-                      <td>ABC</td>
-                      <td>Assistant Professor</td>
-                      <td>MCA</td>
-                    </tr>
+                      <td>{item?.name}</td>
+                      <td>{item?.designation}</td>
+                      <td>{item?.department}</td>
+                      <td>{item?.experiance}</td>
+                      <td>{item?.phone}</td>
+                      <td>{item?.mail}</td>
+                    </tr>)) }
                   </tbody>
                 </table>
-              </div>
+                </div>
+                :
+                <h4 className='text-center text-light'>NO RESIGNED FACULTIES</h4>}
+             
 
             </div>
           </div>
