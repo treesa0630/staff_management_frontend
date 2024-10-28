@@ -1,1 +1,1 @@
-export const serverUrl = 'https://college-server-ve8w.onrender.com'
+export const serverUrl = 'http://localhost:4005'
