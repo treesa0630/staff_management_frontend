@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getResignedApi } from '../services/allApi';
+import { Link } from 'react-router-dom';
 
 function ResignedFaculties() {
 
@@ -25,6 +26,7 @@ console.log(allResignedFaculties);
             </div>
           </div>
           <div className="row justify-content-center">
+            <div className='col-md-1'></div>
             <div className="col-12 col-md-10">
               
              { allResignedFaculties?.length>0 ? <div style={{ overflowX: 'auto' }}>
@@ -66,7 +68,9 @@ console.log(allResignedFaculties);
              
 
             </div>
+            <div className='col-md-1'></div>
           </div>
+          <div className='d-flex align-items-center justify-content-center'><Link to={'/home'} style={{textDecoration:'none'}}> <button  style={{ backgroundColor: '#8b563d', borderColor: '#8b563d', color: 'white' }} className="m-3 px-5 py-2 rounded shadow">Back</button></Link></div>
         </div>
       </div>
     </>
