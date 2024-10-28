@@ -10,7 +10,7 @@ function Home() {
 
   return (
     <>
-      <div className='d-flex p-md-5 p-3' style={{ backgroundColor: '#A87C62' }} >
+      <div className='d-flex p-md-5 p-3' style={{ backgroundColor: '#EEEDEA' }} >
         <div className='container' >
           <div className='row'>
             <div className="col-md-12">

@@ -30,8 +30,11 @@
 
 /* alldepartments vertical scroll */
 .alldepartments{
-  overflow-y: auto;                  
-  max-height: 380px;  
+  overflow-y: scroll;    
+  grid-template-columns: repeat(3,1fr);              
+  max-height: 360px;  
+  row-gap: 15px;
+  column-gap: 20px;
 }
 
 
@@ -42,6 +45,10 @@ input[type=number]::-webkit-outer-spin-button {
     margin: 0; 
 }
 
+.department{
+  overflow-y: scroll;
+  max-height: 230px; 
+}
 
 /* departments horizontal scroll */
 .scrolling-wrapper {
@@ -55,18 +62,6 @@ input[type=number]::-webkit-outer-spin-button {
     display: inline-block;
     border: none;
   }
-}
-.scrolling-wrapper-flexbox {
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-
-  .card {
-    flex: 0 0 auto;
-  }
-}
-.scrolling-wrapper {
-  -webkit-overflow-scrolling: touch;
 }
 
 
