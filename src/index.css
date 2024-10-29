@@ -63,18 +63,6 @@ input[type=number]::-webkit-outer-spin-button {
     border: none;
   }
 }
-.scrolling-wrapper-flexbox {
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-
-  .card {
-    flex: 0 0 auto;
-  }
-}
-.scrolling-wrapper {
-  -webkit-overflow-scrolling: touch;
-}
 
 
 /* styling provided to the scroll-bar */
