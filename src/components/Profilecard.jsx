@@ -5,6 +5,7 @@ import { Card } from 'react-bootstrap'
 import Modal from 'react-bootstrap/Modal';
 import { addResignedApi, deleteFacultyApi
  } from '../services/allApi';
+import { toast } from 'react-toastify';
 
 
 function Profilecard({ details ,setDeleteFacultyStatus,isPresent}) {
@@ -23,6 +24,7 @@ function Profilecard({ details ,setDeleteFacultyStatus,isPresent}) {
     if (result1.status >= 200 && result1.status < 300)
     {
       setDeleteFacultyStatus(result1.data)
+      toast.info('Faculty moved to Resigned Faculties')
     }
     const date = new Date()
  let rdate=new Intl.DateTimeFormat("en-GB",{year:'numeric',month:'2-digit',day:'2-digit'}).format(date)
@@ -43,7 +45,7 @@ function Profilecard({ details ,setDeleteFacultyStatus,isPresent}) {
   return (
     <>
       <div className="card me-3">
-        <Card style={{ width: '100%' }} draggable onDragStart={(e)=>profileDrag(e,details)} className='mt-4'>
+        <Card style={{ width: '100%', backgroundColor:'#EEEDEA'  }} draggable onDragStart={(e)=>profileDrag(e,details)} >
         { !isPresent && <Card.Img
             variant="top"
             src={details?.photo}

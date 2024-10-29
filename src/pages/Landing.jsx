@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 function Landing() {
   return (
-    <div className="landing-page" style={{ backgroundColor: '#A87C62' }}>
+    <div className="landing-page" style={{ backgroundColor:'#EEEDEA'  }}>
       <Image src="https://media.studentcrowd.net/q90/content/university-images/queens-university-belfast-adobestock-525837958.jpeg" fluid alt="Landing Image" />
       
       <Container className="text-center mt-4" fluid>
@@ -21,7 +21,7 @@ function Landing() {
         <Row className="mb-5">
           <Col md={{ span: 8, offset: 2 }}>
             <h3 style={{ color: '#6F402B' }}>ABOUT THE COLLEGE</h3>
-            <p style={{ color: '#E3D4C5' }}>
+            <p style={{ color: '#6F402B' }}>
               Our college is dedicated to providing top-quality education, fostering innovation, and preparing students for future challenges. 
               With a strong faculty and modern infrastructure, we ensure a world-class learning experience. 
               Our mission is to empower students to excel in their academic pursuits and contribute positively to society.
@@ -137,9 +137,9 @@ function Landing() {
           </Col>
 
           <Col md={4} className="mb-4">
-            <Card className='shadow' style={{ backgroundColor: '#6F402B', border: 'none', height: '300px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <Card className='shadow' style={{ backgroundColor: '#E3D4C5', border: 'none', height: '300px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
               <Card.Body>
-                <h1 style={{ color: '#E3D4C5', fontSize: '100px', margin: 0 }}>+</h1>
+                <h1 style={{ color: '#6F402B', fontSize: '100px', margin: 0 }}>+</h1>
               </Card.Body>
             </Card>
           </Col>

@@ -131,7 +131,7 @@ const ondrag =(e)=>{
         <button style={{ backgroundColor: '#6F402B', borderColor: '#6F402B', color: 'white' }} className="m-3 px-3 py-1 rounded shadow" onClick={handleShow}>ADD DEPARTMENT</button>
 
 
-        <div className='alldepartments  p-2 rounded'>
+        <div className='alldepartments d-md-grid p-2 rounded'>
 
 
           {allDepartments?.length > 0 &&
@@ -139,7 +139,7 @@ const ondrag =(e)=>{
             allDepartments.map((item) => (<div className='department border border-secondary mb-1 rounded p-2' droppable onDragOver={(e)=>ondrag(e)} onDrop={(e)=>ProfileDrop(e,item)}>
               <div className='d-flex justify-content-between '>
                 <h6 className='fs-5 mt-2'><b>{item?.department}</b></h6>
-                <Button onClick={()=>handleDelete(item?.id)} variant="danger"><FontAwesomeIcon icon={faTrash} style={{ color: "#ffffff", }}  /></Button>
+                <Button onClick={() => handleDelete(item?.id)} variant="danger"><FontAwesomeIcon icon={faTrash} style={{ color: "#ffffff", }}  /></Button>
               </div>
              { item?.staffs?.length>0 &&
              item?.staffs?.map((details)=>(
@@ -147,6 +147,7 @@ const ondrag =(e)=>{
               <Profilecard details={details} isPresent={true}/>
            
            </div>
+
              ))
             }
              
